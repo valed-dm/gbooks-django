@@ -4,12 +4,12 @@ from api.schemas import Book
 def date_restore(date: str) -> str:
     if len(date) == 4:
         return str(date) + "-01-01"
-    elif len(date) == 5:
+    if len(date) == 5:
         return str(date[:4]) + "-01-01"
-    elif len(date) == 7:
+    if len(date) == 7:
         return str(date) + "-01"
-    else:
-        return date[:10]
+
+    return date[:10]
 
 
 def data_prepare(item):
