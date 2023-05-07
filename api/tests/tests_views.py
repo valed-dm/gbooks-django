@@ -17,10 +17,10 @@ class SetUpTestData(TestCase):
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
-        b = Book()
-        b.google_book_id = "LvEPas12H"
+        book = Book()
+        book.google_book_id = "LvEPas12H"
         # prepare a test book object to be stored in session
-        b_dict = b.__dict__
+        b_dict = book.__dict__
         b_serialized = json.dumps(b_dict, cls=DjangoJSONEncoder)
         b_key = "test_book"
         # stores serialized book object into session
