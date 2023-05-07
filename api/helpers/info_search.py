@@ -1,9 +1,9 @@
 from django.contrib import messages
 
 
-def info_search(request, r, books_found, qty):
-    if r.title is not None:
-        sorting = "sorted by 'newest'" if r.sort == "newest" else ""
+def info_search(request, inp, books_found, qty):
+    if inp.title is not None:
+        sorting = "sorted by 'newest'" if inp.sort == "newest" else ""
         messages.info(
             request,
             f"{qty} books displayed on page."
@@ -14,6 +14,6 @@ def info_search(request, r, books_found, qty):
         )
         messages.info(
             request,
-            f"API was searched for '{r.title}' with '{r.category}'"
-            f"category {sorting} among first {r.pace} items."
+            f"API was searched for '{inp.title}' with '{inp.category}'"
+            f"category {sorting} among first {inp.pace} items."
         )
