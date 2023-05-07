@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_gbooks_django_1683460251762-push-trigger-input-set
+  identifier: Build_gbooks_django_1683460251762pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_gbooks_django_1683460251762
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
