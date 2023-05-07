@@ -15,16 +15,15 @@ def fetch_to_session(request):
     books_found, books = fetch_result(args)
 
     for book in books:
-        b = book
         # serializes book object
-        b_dict = b.__dict__
+        b_dict = book.__dict__
         b_serialized = json.dumps(b_dict, cls=DjangoJSONEncoder)
         b_key = book.google_book_id
         # stores serialized book object into django session
         request.session[b_key] = b_serialized
         # provides authors, categories string truncated for books.html cards
-        b.authors = prepare_list(b.authors)
-        b.categories = prepare_list(b.categories)
+        book.authors = prepare_list(book.authors)
+        book.categories = prepare_list(book.categories)
 
     info_search(request, args, books_found, len(books))
     # triggers no search performed info to be shown for initial page appearance
