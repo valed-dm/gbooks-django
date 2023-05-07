@@ -1,11 +1,11 @@
 import datetime
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
 class Book:
-    authors: [str] = "-no author-",
-    categories: [str] = "-no category-",
+    authors: list = field(default_factory=lambda: ["-no author-"])
+    categories: list = field(default_factory=lambda: ["-no category-"])
     date: datetime.date = "1900-01-01"
     description: str = "no description"
     google_book_id: str = ""
