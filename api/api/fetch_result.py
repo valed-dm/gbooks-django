@@ -5,12 +5,12 @@ from .fetch_prepare import data_prepare
 from .fetch_uri import fetch_uri_create
 
 
-def fetch_result(r):
+def fetch_result(req):
     books = []
     books_found = "0"
 
-    if r.title:
-        uri = fetch_uri_create(r.title, r.pace)
+    if req.title:
+        uri = fetch_uri_create(req.title, req.pace)
         res = fetch_books(uri)
 
         books_found = res[0]
@@ -29,6 +29,6 @@ def fetch_result(r):
             )
             books.append(book)
 
-    books = sorting_results(books, r.category, r.sort)
+    books = sorting_results(books, req.category, req.sort)
 
     return [books_found, books]
