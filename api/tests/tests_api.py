@@ -7,7 +7,7 @@ from django.urls import reverse
 from api.api import fetch_to_session
 
 
-class TestAPI(TestCase):
+class SetUpTest(TestCase):
     client = Client()
     data = {
         "title": "test_book",
@@ -28,7 +28,7 @@ class TestAPI(TestCase):
     }
 
     @patch("api.api.fetch_books.fetch_data")
-    def setUp(self, mock_request):
+    def setUp(self, mock_request=None):
         mock_request.return_value = {
             "totalItems": 100,
             "items": [self.item]
@@ -36,6 +36,9 @@ class TestAPI(TestCase):
         response = self.client.post(reverse("books"), data=self.data)
         request = response.wsgi_request
         self.api = fetch_to_session(request)
+
+
+class TestAPI(SetUpTest):
 
     def test_fetch_to_session(self):
         # checks the main page view trigger
