@@ -1,8 +1,8 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
 class API:
-    books: list = [],
-    books_found: str = "",
-    display_start_info: bool = True,
+    books: list = field(default_factory=lambda: [])
+    books_found: str = ""
+    display_start_info: bool = True
