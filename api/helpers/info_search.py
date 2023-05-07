@@ -14,5 +14,6 @@ def info_search(request, r, books_found, qty):
         )
         messages.info(
             request,
-            f"API was searched for '{r.title}' with '{r.category}' category {sorting} among first {r.pace} items."
+            f"API was searched for '{r.title}' with '{r.category}'"
+            f"category {sorting} among first {r.pace} items."
         )
