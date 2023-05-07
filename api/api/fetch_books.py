@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 
 def fetch_data(url: str) -> dict:
-    res = requests.get(url)
+    res = requests.get(url, timeout=10)
     response = json.loads(res.text)
     return response
 
