@@ -11,8 +11,8 @@ from .fetch_result import fetch_result
 
 
 def fetch_to_session(request):
-    r = get_args_book(request)
-    books_found, books = fetch_result(r)
+    args = get_args_book(request)
+    books_found, books = fetch_result(args)
 
     for book in books:
         b = book
@@ -26,9 +26,9 @@ def fetch_to_session(request):
         b.authors = prepare_list(b.authors)
         b.categories = prepare_list(b.categories)
 
-    info_search(request, r, books_found, len(books))
+    info_search(request, args, books_found, len(books))
     # triggers no search performed info to be shown for initial page appearance
-    display_start_info = r.title is None
+    display_start_info = args.title is None
 
     api = API()
     api.books = books
