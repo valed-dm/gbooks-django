@@ -8,33 +8,32 @@ from .get_or_create import get_or_create
 
 
 def add_book(request, book):
-    b = book
     # truncates names to avoid doubles in db authors, categories
-    book_authors = [author.strip() for author in b["authors"]]
-    book_categories = [category.strip() for category in b["categories"]]
+    book_authors = [author.strip() for author in book["authors"]]
+    book_categories = [category.strip() for category in book["categories"]]
     # gets or creates authors, categories to be filled in m-2-m Book fields
     authors = get_or_create(Author, book_authors)
     categories = get_or_create(Category, book_categories)
     # still not in use at the moment but is left for the future
     authors_str = authors_string(book_authors)
     # checks if book already added to db before
-    book_exists = Book.objects.all().filter(google_book_id=b["google_book_id"]).exists()
+    book_exists = Book.objects.all().filter(google_book_id=book["google_book_id"]).exists()
     # fills in Image table to provide data for 1-2-1 image_src field
-    image_src = Image(image_src=b["image_src"])
+    image_src = Image(image_src=book["image_src"])
     # primarily saves data to get image_src_id
     image_src.save()
 
     # prepares book data to be filled in books table
     if book_exists:
-        info_exists(request, b["title"])
+        info_exists(request, book["title"])
         return redirect("book/")
     else:
         book_to_library = Book(
             authors_str=authors_str,
-            title=b["title"],
-            description=b["description"],
-            date=b["date"],
-            google_book_id=b["google_book_id"],
+            title=book["title"],
+            description=book["description"],
+            date=book["date"],
+            google_book_id=book["google_book_id"],
             rubric="read_asap",
             remark="no remark added",
             image_src=image_src,
@@ -47,4 +46,4 @@ def add_book(request, book):
     book_to_library.authors.set(authors)
     book_to_library.categories.set(categories)
 
-    info_add(request, b["title"])
+    info_add(request, book["title"])
