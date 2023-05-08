@@ -16,6 +16,7 @@ class SetUpTestData(TestCase):
         categories = get_or_create(Category, book.categories)
         image_src = Image(image_src=book.image_src)
         image_src.save()
+        # pylint: disable = no-value-for-parameter
         save_book_to_library(book, image_src, authors, categories)
         cls.book = Book_DB.objects.prefetch_related("authors", "categories").get(pk=1)
 
