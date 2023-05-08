@@ -6,6 +6,8 @@ from library.models import Author, Book as Book_DB, Category, Image
 
 
 class SetUpTestData(TestCase):
+    book = Book()
+
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
@@ -28,96 +30,105 @@ class SetUpTestData(TestCase):
         book_to_library.authors.set(authors)
         book_to_library.categories.set(categories)
 
+        cls.book = Book_DB.objects.prefetch_related("authors", "categories").get(pk=1)
 
-class TestBookModel(SetUpTestData):
-    def setUp(self):
-        self.book = Book_DB.objects.prefetch_related("authors", "categories").get(pk=1)
 
+class TestBookModelReprStr(SetUpTestData):
     def test_book_str(self):
         expected_object_name = repr(self.book.title)
         self.assertEqual(str(self.book), expected_object_name)
 
+
+class TestBookModelLabels(SetUpTestData):
     def test_book_authors_str_label(self):
         field_label = self.book._meta.get_field("authors_str").verbose_name
         self.assertEqual(field_label, "authors str")
-
-    def test_book_authors_str_max_length(self):
-        max_length = self.book._meta.get_field("authors_str").max_length
-        self.assertEqual(max_length, 200)
 
     def test_book_title_label(self):
         field_label = self.book._meta.get_field("title").verbose_name
         self.assertEqual(field_label, "title")
 
-    def test_book_title_max_length(self):
-        max_length = self.book._meta.get_field("title").max_length
-        self.assertEqual(max_length, 200)
-
     def test_book_description_label(self):
         field_label = self.book._meta.get_field("description").verbose_name
         self.assertEqual(field_label, "description")
-
-    def test_book_description_field_type(self):
-        field_type = self.book._meta.get_field("description").get_internal_type()
-        self.assertEqual(field_type, "TextField")
 
     def test_book_date_label(self):
         field_label = self.book._meta.get_field("date").verbose_name
         self.assertEqual(field_label, "date")
 
-    def test_book_date_field_type(self):
-        field_type = self.book._meta.get_field("date").get_internal_type()
-        self.assertEqual(field_type, "DateField")
-
     def test_book_google_book_id_label(self):
         field_label = self.book._meta.get_field("google_book_id").verbose_name
         self.assertEqual(field_label, "google book id")
-
-    def test_book_google_book_id_max_length(self):
-        max_length = self.book._meta.get_field("google_book_id").max_length
-        self.assertEqual(max_length, 20)
-
-    def test_book_google_book_id_field_is_set_unique(self):
-        field_unique = self.book._meta.get_field("google_book_id").unique
-        self.assertEqual(field_unique, True)
 
     def test_book_rubric_label(self):
         field_label = self.book._meta.get_field("rubric").verbose_name
         self.assertEqual(field_label, "rubric")
 
-    def test_book_rubric_max_length(self):
-        max_length = self.book._meta.get_field("rubric").max_length
-        self.assertEqual(max_length, 20)
-
     def test_book_remark_label(self):
         field_label = self.book._meta.get_field("remark").verbose_name
         self.assertEqual(field_label, "remark")
-
-    def test_book_remark_max_length(self):
-        max_length = self.book._meta.get_field("remark").max_length
-        self.assertEqual(max_length, 100)
 
     def test_book_image_src_label(self):
         field_label = self.book._meta.get_field("image_src").verbose_name
         self.assertEqual(field_label, "image src")
 
-    def test_book_image_src_value(self):
-        self.assertEqual(self.book.image_src.image_src, "/static/img/no_cover.webp")
-
     def test_book_authors_label(self):
         field_label = self.book._meta.get_field("authors").verbose_name
         self.assertEqual(field_label, "authors")
-
-    def test_book_authors_value(self):
-        self.assertEqual(self.book.authors.all()[0].name, "-no author-")
 
     def test_book_categories_label(self):
         field_label = self.book._meta.get_field("categories").verbose_name
         self.assertEqual(field_label, "categories")
 
+
+class TestBookModelFieldsMaxLength(SetUpTestData):
+    def test_book_authors_str_max_length(self):
+        max_length = self.book._meta.get_field("authors_str").max_length
+        self.assertEqual(max_length, 200)
+
+    def test_book_title_max_length(self):
+        max_length = self.book._meta.get_field("title").max_length
+        self.assertEqual(max_length, 200)
+
+    def test_book_google_book_id_max_length(self):
+        max_length = self.book._meta.get_field("google_book_id").max_length
+        self.assertEqual(max_length, 20)
+
+    def test_book_rubric_max_length(self):
+        max_length = self.book._meta.get_field("rubric").max_length
+        self.assertEqual(max_length, 20)
+
+    def test_book_remark_max_length(self):
+        max_length = self.book._meta.get_field("remark").max_length
+        self.assertEqual(max_length, 100)
+
+
+class TestBookModelFieldTypes(SetUpTestData):
+    def test_book_description_field_type(self):
+        field_type = self.book._meta.get_field("description").get_internal_type()
+        self.assertEqual(field_type, "TextField")
+
+    def test_book_date_field_type(self):
+        field_type = self.book._meta.get_field("date").get_internal_type()
+        self.assertEqual(field_type, "DateField")
+
+    def test_book_google_book_id_field_is_set_unique(self):
+        field_unique = self.book._meta.get_field("google_book_id").unique
+        self.assertEqual(field_unique, True)
+
+
+class TestBookModelValues(SetUpTestData):
+    def test_book_image_src_value(self):
+        self.assertEqual(self.book.image_src.image_src, "/static/img/no_cover.webp")
+
+    def test_book_authors_value(self):
+        self.assertEqual(self.book.authors.all()[0].name, "-no author-")
+
     def test_book_categories_value(self):
         self.assertEqual(self.book.categories.all()[0].name, "-no category-")
 
+
+class TestBookModelFieldsQTY(SetUpTestData):
     def test_book_fields_qty(self):
         self.assertEqual(len(self.book._meta.fields), 9)
 
