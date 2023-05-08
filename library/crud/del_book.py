@@ -8,7 +8,7 @@ from library.models import Book
 
 # deletes from reverse side of 1-2-1 Image relation
 @receiver(post_delete, sender=Book)
-def delete_image(sender, instance, **kwargs):
+def delete_image(instance, **kwargs):
     instance.image_src.delete()
 
 
