@@ -26,11 +26,11 @@ def sort_date(sort, books):
     return res
 
 
-def sort_books(r, library_books):
+def sort_books(req, library_books):
     result = sort_rubric(
-        r.rubric,
+        req.rubric,
         sort_category(
-            r.category, sort_author(r.author, sort_date(r.sort, library_books))
+            req.category, sort_author(req.author, sort_date(req.sort, library_books))
         ),
     )
 
