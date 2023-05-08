@@ -29,17 +29,18 @@ def add_book(request, book):
     if book_exists:
         info_exists(request, book["title"])
         return redirect("book/")
-    else:
-        book_to_library = Book(
-            authors_str=authors_str,
-            title=book["title"],
-            description=book["description"],
-            date=book["date"],
-            google_book_id=book["google_book_id"],
-            rubric="read_asap",
-            remark="no remark added",
-            image_src=image_src,
-        )
+
+    book_to_library = Book(
+        authors_str=authors_str,
+        title=book["title"],
+        description=book["description"],
+        date=book["date"],
+        google_book_id=book["google_book_id"],
+        rubric="read_asap",
+        remark="no remark added",
+        image_src=image_src,
+    )
+
     # primarily saves book_to_library data into db
     # for a reason that book_id is necessary to perform coming next m2m operations
     book_to_library.save()
