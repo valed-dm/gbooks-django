@@ -5,6 +5,7 @@ from library.helpers.info_add import info_add
 from library.helpers.info_exists import info_exists
 from library.models import Author, Book, Category, Image
 from .get_or_create import get_or_create
+from .save_book import save_book_to_library
 
 
 def add_book(request, book):
@@ -30,25 +31,7 @@ def add_book(request, book):
         info_exists(request, book["title"])
         return redirect("book/")
 
-    book_to_library = Book(
-        authors_str=authors_str,
-        title=book["title"],
-        description=book["description"],
-        date=book["date"],
-        google_book_id=book["google_book_id"],
-        rubric="read_asap",
-        remark="no remark added",
-        image_src=image_src,
-    )
-
-    # primarily saves book_to_library data into db
-    # for a reason that book_id is necessary to perform coming next m2m operations
-    book_to_library.save()
-    # m-2-m operations on book object in db are performed
-    # m-2-m association tables are filled in automatically
-    book_to_library.authors.set(authors)
-    book_to_library.categories.set(categories)
-
+    save_book_to_library(book, authors_str, image_src, authors, categories)
     info_add(request, book["title"])
 
     return book

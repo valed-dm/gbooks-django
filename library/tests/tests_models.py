@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from api.schemas import Book
-from library.crud import get_or_create
+from library.crud import get_or_create, save_book_to_library
 from library.models import Author, Book as Book_DB, Category, Image
 
 
@@ -16,20 +16,7 @@ class SetUpTestData(TestCase):
         categories = get_or_create(Category, book.categories)
         image_src = Image(image_src=book.image_src)
         image_src.save()
-        book_to_library = Book_DB(
-            authors_str=book.authors[0],
-            title=book.title,
-            description=book.description,
-            date=book.date,
-            google_book_id=book.google_book_id,
-            rubric="read_asap",
-            remark="no remark added",
-            image_src=image_src,
-        )
-        book_to_library.save()
-        book_to_library.authors.set(authors)
-        book_to_library.categories.set(categories)
-
+        save_book_to_library(book, image_src, authors, categories)
         cls.book = Book_DB.objects.prefetch_related("authors", "categories").get(pk=1)
 
 
