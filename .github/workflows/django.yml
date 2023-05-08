@@ -25,6 +25,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+        env:
+          ENVIRONMENT: development
+          SECRET_KEY: f4@#c!suh2q3n84y8.,b_#w%1p6vr$njc9117h7#u4';$yy^*4t8g7&$%h7d
+          ALLOWED_HOSTS: localhost,127.0.0.1
       - name: Run Tests
         run: |
           python manage.py test
