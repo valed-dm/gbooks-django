@@ -31,7 +31,7 @@ class TestViews(TestCase):
         session["auth"] = json.dumps("test_author", cls=DjangoJSONEncoder)
         session["cat-"] = json.dumps("test_category", cls=DjangoJSONEncoder)
         session.save()
-        response = self.client.get('/library/book/test_book')
+        response = self.client.get("/library/book/test_book")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["width"], 150)
         self.assertEqual(response.context["height"], 210)

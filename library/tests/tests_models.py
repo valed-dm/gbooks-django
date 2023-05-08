@@ -6,7 +6,6 @@ from library.models import Author, Book as Book_DB, Category, Image
 
 
 class SetUpTestData(TestCase):
-
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
@@ -31,11 +30,8 @@ class SetUpTestData(TestCase):
 
 
 class TestBookModel(SetUpTestData):
-
     def setUp(self):
-        self.book = Book_DB.objects. \
-            prefetch_related("authors", "categories"). \
-            get(pk=1)
+        self.book = Book_DB.objects.prefetch_related("authors", "categories").get(pk=1)
 
     def test_book_str(self):
         expected_object_name = repr(self.book.title)
@@ -130,7 +126,6 @@ class TestBookModel(SetUpTestData):
 
 
 class TestAuthorModel(SetUpTestData):
-
     def setUp(self):
         self.author = Author.objects.get(pk=1)
 
@@ -161,7 +156,6 @@ class TestAuthorModel(SetUpTestData):
 
 
 class TestCategoryModel(SetUpTestData):
-
     def setUp(self):
         self.category = Category.objects.get(pk=1)
 
@@ -192,7 +186,6 @@ class TestCategoryModel(SetUpTestData):
 
 
 class TestImageModel(SetUpTestData):
-
     def setUp(self):
         self.image = Image.objects.get(pk=1)
 

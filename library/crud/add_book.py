@@ -17,7 +17,9 @@ def add_book(request, book):
     # still not in use at the moment but is left for the future
     authors_str = authors_string(book_authors)
     # checks if book already added to db before
-    book_exists = Book.objects.all().filter(google_book_id=book["google_book_id"]).exists()
+    book_exists = (
+        Book.objects.all().filter(google_book_id=book["google_book_id"]).exists()
+    )
     # fills in Image table to provide data for 1-2-1 image_src field
     image_src = Image(image_src=book["image_src"])
     # primarily saves data to get image_src_id

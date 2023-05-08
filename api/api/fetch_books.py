@@ -21,6 +21,8 @@ def fetch_data(url: str) -> dict:
 def fetch_books(url) -> list:
     books = fetch_data(url)
     # print("response data ===>", books)
-    result = [books['totalItems'], books['items']]
-    log.info("%s found upon request, %s books data loaded", repr(result[0]), len(result[1]))
+    result = [books["totalItems"], books["items"]]
+    log.info(
+        "%s found upon request, %s books data loaded", repr(result[0]), len(result[1])
+    )
     return result

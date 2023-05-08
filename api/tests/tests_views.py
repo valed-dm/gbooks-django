@@ -33,13 +33,13 @@ class TestViews(SetUpTestData):
         self.factory = RequestFactory()
 
     def test_book_search(self):
-        request = self.factory.get('/')
+        request = self.factory.get("/")
         response = books_view(request)
         self.assertEqual(response.status_code, 200)
 
     def test_book_details(self):
         # Create an instance of a GET request.
-        request = self.factory.get('book/?id=test_book')
+        request = self.factory.get("book/?id=test_book")
         # 'WSGIRequest' object gets attribute 'session'
         request.session = self.session
         response = book_view(request)

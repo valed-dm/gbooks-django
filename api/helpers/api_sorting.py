@@ -13,9 +13,7 @@ def check_category(item: Book, cat: str) -> bool:
 
 def sorted_by_date(books: [Book]):
     return sorted(
-        books,
-        key=lambda book: datetime.strptime(book.date, '%Y-%m-%d'),
-        reverse=True
+        books, key=lambda book: datetime.strptime(book.date, "%Y-%m-%d"), reverse=True
     )
 
 

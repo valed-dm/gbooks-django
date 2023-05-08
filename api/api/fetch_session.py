@@ -6,7 +6,6 @@ from api.helpers import prepare_list
 from api.helpers.get_args import get_args_book
 from api.helpers.info_search import info_search
 from api.schemas import API
-# from .fetch_prepare import data_prepare
 from .fetch_result import fetch_result
 
 

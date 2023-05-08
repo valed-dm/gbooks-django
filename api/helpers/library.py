@@ -8,10 +8,10 @@ def add_into_library(request):
     b_key = data["add_book"]
     b_rubric = data["rubric"]
     b_remarks = data["remarks"]
-    b_serialized = request.session.get(f'{b_key}', None)
+    b_serialized = request.session.get(f"{b_key}", None)
     book = json.loads(b_serialized)
     book["rubric"] = b_rubric
-    book['remarks'] = b_remarks
+    book["remarks"] = b_remarks
 
     add_book(request, book)
 

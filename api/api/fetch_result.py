@@ -25,7 +25,7 @@ def fetch_result(req):
                 description=api_data.description,
                 google_book_id=api_data.google_book_id,
                 image_src=api_data.image_src,
-                title=api_data.title
+                title=api_data.title,
             )
             books.append(book)
 

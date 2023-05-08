@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 ENVIRONMENT = env.str("ENVIRONMENT")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY')
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -39,8 +39,8 @@ if ENVIRONMENT == "production":
     # CSRF_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
-CORS_ORIGIN_WHITELIST = ['http://localhost:8080']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
+CORS_ORIGIN_WHITELIST = ["http://localhost:8080"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8080"]
 
 # Application definition
 
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     # own
     "api",
     "gbooks",
-    "library"
+    "library",
 ]
 
 MIDDLEWARE = [
@@ -76,7 +76,7 @@ ROOT_URLCONF = "gbooks.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates'],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -144,7 +144,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = [BASE_DIR / "gbooks/static"]
 STATIC_URL = "/static/"
-STATIC_ROOT = env.str('STATIC_URL', default='static/')
+STATIC_ROOT = env.str("STATIC_URL", default="static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

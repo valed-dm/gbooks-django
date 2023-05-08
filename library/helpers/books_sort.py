@@ -33,15 +33,8 @@ def sort_books(r, library_books):
     result = sort_rubric(
         r.rubric,
         sort_category(
-            r.category,
-            sort_author(
-                r.author,
-                sort_date(
-                    r.sort,
-                    library_books
-                )
-            )
-        )
+            r.category, sort_author(r.author, sort_date(r.sort, library_books))
+        ),
     )
 
     return result

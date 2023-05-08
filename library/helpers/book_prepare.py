@@ -15,7 +15,7 @@ def book_prepare(book: Book_DB) -> Book:
         image_src=book.image_src.image_src,
         title=book.title,
         rubric=book.rubric,
-        remark=book.remark
+        remark=book.remark,
     )
 
     return book_data

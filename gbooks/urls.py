@@ -21,7 +21,7 @@ from api.views import books_view, book_view
 from library.views import BookDetailView, LibraryListView
 
 urlpatterns = [
-    path('__debug__/', include('debug_toolbar.urls')),
+    path("__debug__/", include("debug_toolbar.urls")),
     path("admin/", admin.site.urls),
     path("", books_view, name="books"),
     path("book/", book_view, name="book"),

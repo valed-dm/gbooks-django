@@ -8,11 +8,6 @@ def get_args_library(request):
     author = data.get("author")
     sort = data.get("sort")
 
-    req_args = ArgsLibrary(
-        rubric=rubric,
-        category=category,
-        author=author,
-        sort=sort
-    )
+    req_args = ArgsLibrary(rubric=rubric, category=category, author=author, sort=sort)
 
     return req_args

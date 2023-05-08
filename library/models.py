@@ -34,7 +34,9 @@ class Book(models.Model):
     google_book_id = models.CharField(max_length=20, unique=True)
     rubric = models.CharField(max_length=20)
     remark = models.CharField(max_length=100, blank=True, default="")
-    image_src = models.OneToOneField(Image, null=True, related_name="images", on_delete=models.CASCADE)
+    image_src = models.OneToOneField(
+        Image, null=True, related_name="images", on_delete=models.CASCADE
+    )
     authors = models.ManyToManyField(Author)
     categories = models.ManyToManyField(Category)
 
