@@ -8,14 +8,14 @@ def sort_rubric(rubric, books):
 def sort_category(category, books):
     res = books
     if category != "all":
-        res = [book for book in books if category in [cat for cat in book.categories]]
+        res = list(book.categories for book in books)
     return res
 
 
 def sort_author(author, books):
     res = books
     if author != "all":
-        res = [book for book in books if author in [auth for auth in book.authors]]
+        res = list(book.authors for book in books)
     return res
 
 
@@ -27,9 +27,6 @@ def sort_date(sort, books):
 
 
 def sort_books(r, library_books):
-    # print("request data", r.__dict__)
-    # for book in library_books:
-    #     print(book.__dict__)
     result = sort_rubric(
         r.rubric,
         sort_category(
