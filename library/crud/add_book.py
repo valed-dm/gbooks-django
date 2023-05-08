@@ -50,3 +50,5 @@ def add_book(request, book):
     book_to_library.categories.set(categories)
 
     info_add(request, book["title"])
+
+    return book
