@@ -31,7 +31,7 @@ def add_book(request, book):
         info_exists(request, book["title"])
         return redirect("book/")
 
-    save_book_to_library(book, authors_str, image_src, authors, categories)
+    save_book_to_library(book, image_src, authors, categories, authors_str)
     info_add(request, book["title"])
 
     return book
