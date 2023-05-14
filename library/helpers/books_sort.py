@@ -8,14 +8,20 @@ def sort_rubric(rubric, books):
 def sort_category(category, books):
     res = books
     if category != "all":
-        res = list(book.categories for book in books)
+        res = []
+        for book in books:
+            if category in list(book.categories):
+                res.append(book)
     return res
 
 
 def sort_author(author, books):
     res = books
     if author != "all":
-        res = list(book.authors for book in books)
+        res = []
+        for book in books:
+            if author in list(book.authors):
+                res.append(book)
     return res
 
 
